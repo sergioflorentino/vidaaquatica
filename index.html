@@ -1,342 +1,579 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vida Aquática - Aquarismo e Pet Shop</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary-color: #0096c7;
-            --primary-dark: #023e8a;
-            --primary-light: #48cae4;
-            --accent-green: #25D366;
-            --accent-green-dark: #1da851;
-            --text-dark: #1d2d44;
-            --bg-light: #f0f8ff;
-            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mundo Subaquático</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* --- Reset e Fontes --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+    body,
+    html {
+      min-height: 100%;
+      overflow-y: auto;
+      color: #ffffff;
+    }
 
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    /* --- Vídeo de Fundo --- */
+    .bg-video {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -2;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
 
-        /* Header / Hero */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
-            color: white;
-            text-align: center;
-            padding: 50px 20px 40px 20px;
-            border-radius: 0 0 30px 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            position: relative;
-        }
+    /* Overlay escuro para dar contraste ao texto */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 20, 40, 0.4);
+      z-index: -1;
+    }
 
-        .logo-icon {
-            font-size: 50px;
-            color: var(--primary-light);
-            margin-bottom: 10px;
-        }
+    /* --- Conteúdo da Landing Page --- */
+    .content {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
 
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
+    .content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+      letter-spacing: 2px;
+    }
 
-        .hero p.tagline {
-            font-size: 1.1rem;
-            font-weight: 300;
-            opacity: 0.95;
-            margin-bottom: 15px;
-        }
+    .content p {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin-bottom: 30px;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+      line-height: 1.6;
+    }
 
-        .badge-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+    .btn-cta {
+      display: inline-block;
+      padding: 15px 35px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #00334e;
+      background-color: #00f2fe;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+      transition: all 0.3s ease;
+    }
 
-        .badge {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
+    .btn-cta:hover {
+      background-color: #ffffff;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+      transform: translateY(-3px);
+    }
 
-        /* Container Principal */
-        .container {
-            max-width: 650px;
-            margin: 0 auto;
-            padding: 30px 20px;
-            flex: 1;
-            width: 100%;
-        }
+    /* --- Animação de Bolhas CSS --- */
+    .bubbles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+      /* Permite clicar nos elementos atrás das bolhas */
+    }
 
-        .intro-text {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+      animation: rise 10s infinite ease-in;
+    }
 
-        .intro-text h2 {
-            font-size: 1.4rem;
-            color: var(--primary-dark);
-            margin-bottom: 8px;
-        }
+    /* Animação que faz a bolha subir e oscilar para os lados */
+    @keyframes rise {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
 
-        .intro-text p {
-            color: #555;
-            font-size: 0.95rem;
-        }
+      10% {
+        opacity: 0.8;
+      }
 
-        /* Cards e Botões das Lojas */
-        .cta-section {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 35px;
-        }
+      50% {
+        transform: translateY(-65vh) translateX(50px);
+      }
 
-        .store-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: var(--card-shadow);
-            border: 1px solid rgba(0, 150, 199, 0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
+      100% {
+        transform: translateY(-65vh) translateX(-30px);
+        opacity: 0;
+      }
+    }
 
-        .store-card:hover {
-            transform: translateY(-3px);
-        }
+    /* Mesma animação, mas as bolhas ficam 50% transparentes na metade do percurso */
+    @keyframes riseFade {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
 
-        .store-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary-dark);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
+      10% {
+        opacity: 0.8;
+      }
 
-        .store-address {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
+      50% {
+        transform: translateY(-65vh) translateX(50px);
+        opacity: 0.5;
+      }
 
-        /* Botão do WhatsApp */
-        .btn-whatsapp {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 100%;
-            background-color: var(--accent-green);
-            color: white;
-            text-decoration: none;
-            padding: 16px 24px;
-            border-radius: 50px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-            transition: all 0.3s ease;
-        }
+      100% {
+        transform: translateY(-65vh) translateX(-30px);
+        opacity: 0;
+      }
+    }
 
-        .btn-whatsapp:hover {
-            background-color: var(--accent-green-dark);
-            transform: scale(1.02);
-        }
 
-        .btn-whatsapp i {
-            font-size: 1.4rem;
-        }
+    :root {
+      --primary-color: #0096c7;
+      --primary-dark: #023e8a;
+      --primary-light: #48cae4;
+      --accent-green: #25D366;
+      --accent-green-dark: #1da851;
+      --text-dark: #1d2d44;
+      --bg-light: #f0f8ff;
+      --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
 
-        /* Destaques e Serviços */
-        .features {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 30px;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-        .features-title {
-            text-align: center;
-            font-size: 1.1rem;
-            color: var(--primary-dark);
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
+    /* Header / Hero */
+    .hero {
+      /*background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);*/
+      color: white;
+      text-align: center;
+      padding: 50px 20px 40px 20px;
+      border-radius: 0 0 30px 30px;
+      /*box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);*/
+      position: relative;
+      justify-content: center;
+    }
 
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-            color: #444;
-        }
+    .logo-icon {
+      font-size: 50px;
+      color: var(--primary-light);
+      margin-bottom: 10px;
+    }
 
-        .feature-item i {
-            color: var(--primary-color);
-        }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
 
-        /* Links Úteis */
-        .info-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
+    .hero p.tagline {
+      font-size: 1.1rem;
+      font-weight: 300;
+      opacity: 0.95;
+      margin-bottom: 15px;
+    }
 
-        .info-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: white;
-            padding: 10px 18px;
-            border-radius: 30px;
-            color: var(--text-dark);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
+    .badge-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
-            color: #888;
-            background: #e6f0fa;
-        }
+    .badge {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
 
-        @media (max-width: 480px) {
-            .features-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+    /* Container Principal */
+    .container {
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .intro-text {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .intro-text h2 {
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+    }
+
+    .intro-text p {
+      color: #e2e2e2;
+      font-size: 0.95rem;
+    }
+
+    /* Cards e Botões das Lojas */
+    .cta-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 35px;
+    }
+
+    .store-card {
+      background: white;
+      border-radius: 20px;
+      padding: 10px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(0, 150, 199, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .store-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .store-img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 15px;
+      flex-shrink: 0;
+    }
+
+    .store-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .store-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .store-address {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Botão do WhatsApp */
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      background-color: var(--accent-green-dark);
+      color: white;
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: var(--accent-green);
+      transform: scale(1.02);
+    }
+
+    .btn-whatsapp i {
+      font-size: 1.4rem;
+    }
+
+    /* Destaques e Serviços */
+    .features {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 30px;
+    }
+
+    .features-title {
+      text-align: center;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    .feature-item i {
+      color: var(--primary-color);
+    }
+
+    /* Links Úteis */
+    .info-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .info-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      padding: 10px 18px;
+      border-radius: 30px;
+      color: var(--text-dark);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.8rem;
+      color: #888;
+      background: #e6f0fa;
+    }
+
+    @media (max-width: 480px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .store-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .store-img {
+        width: 100%;
+        height: 160px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <!-- Header -->
-    <header class="hero">
-        <div><i class="fa-solid fa-fish-fins logo-icon"></i></div>
-        <h1>Vida Aquática</h1>
-        <p class="tagline">Aquarismo & Pet Shop — Atacado e Varejo</p>
-        <div class="badge-container">
-            <span class="badge"><i class="fa-solid fa-water"></i> Aquarismo Especializado</span>
-            <span class="badge"><i class="fa-solid fa-paw"></i> Linha Pet Completa</span>
+  <!-- Vídeo de Fundo (Substitua a URL do 'src' pelo seu próprio arquivo .mp4 se preferir) -->
+  <video class="bg-video" autoplay loop muted playsinline>
+    <source src="agua-move.mp4" type="video/mp4" />
+    Seu navegador não suporta vídeos em HTML5.
+  </video>
+
+  <!-- Camada de sobreposição para melhorar o contraste -->
+  <div class="overlay"></div>
+
+  <!-- Contêiner das Bolhas Animadas -->
+  <div class="bubbles-container" id="bubbles"></div>
+
+  <!-- Conteúdo Principal -->
+  <!-- Header -->
+  <header class="hero">
+    <img src="logo-vidaaquatica.png" alt="Vida Aquatica" style="height: 160px; width: auto;" />
+    <p class="tagline">Aquarismo & Pet Shop — Atacado e Varejo</p>
+    <div class="badge-container">
+      <span class="badge"><i class="fa-solid fa-water"></i> Aquarismo Especializado</span>
+      <span class="badge"><i class="fa-solid fa-paw"></i> Linha Pet Completa</span>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container">
+
+    <div class="intro-text">
+      <h2>Fale direto com a nossa equipe!</h2>
+      <p>Escolha a unidade mais próxima de você para atendimento rápido via WhatsApp:</p>
+    </div>
+
+    <!-- Botões de Ação para as Lojas -->
+    <div class="cta-section">
+
+      <!-- Botão 1: Piedade -->
+      <div class="store-card">
+        <img src="prazeres.png" alt="Unidade Piedade" class="store-img" />
+        <div class="store-info">
+          <div class="store-title">
+            <i class="fa-solid fa-store" style="color: var(--primary-color);"></i>
+            Unidade Piedade
+          </div>
+          <div class="store-address">
+            <i class="fa-solid fa-location-dot"></i>
+            Rua Sebastião Alves, 45 — Piedade <br>Jaboatão dos Guararapes/PE
+          </div>
+          <a href="https://wa.me/5581999664340?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20atendimento%20para%20a%20loja%20de%20Piedade."
+            target="_blank" class="btn-whatsapp">
+            <i class="fa-brands fa-whatsapp"></i>
+            WhatsApp Unidade Piedade
+          </a>
         </div>
-    </header>
+      </div>
 
-    <!-- Conteúdo Principal -->
-    <main class="container">
-        
-        <div class="intro-text">
-            <h2>Fale direto com a nossa equipe!</h2>
-            <p>Escolha a unidade mais próxima de você para atendimento rápido via WhatsApp:</p>
+      <!-- Botão 2: Mercado da Madalena -->
+      <div class="store-card">
+        <img src="madalena.png" alt="Unidade Mercado da Madalena" class="store-img" />
+        <div class="store-info">
+          <div class="store-title">
+            <i class="fa-solid fa-store" style="color: var(--primary-color);"></i>
+            Unidade Mercado da Madalena
+          </div>
+          <div class="store-address">
+            <i class="fa-solid fa-location-dot"></i>
+            Rua Real da Torre, 67 (Boxes 92 a 99) <br> Madalena - Recife/PE
+          </div>
+          <a href="https://wa.me/5581999664340?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20atendimento%20para%20a%20loja%20da%20Madalena."
+            target="_blank" class="btn-whatsapp">
+            <i class="fa-brands fa-whatsapp"></i>
+            WhatsApp Mercado da Madalena
+          </a>
         </div>
+      </div>
 
-        <!-- Botões de Ação para as Lojas -->
-        <div class="cta-section">
-            
-            <!-- Botão 1: Piedade -->
-            <div class="store-card">
-                <div class="store-title">
-                    <i class="fa-solid fa-store" style="color: var(--primary-color);"></i>
-                    Unidade Piedade
-                </div>
-                <div class="store-address">
-                    <i class="fa-solid fa-location-dot"></i>
-                    Rua Sebastião Alves, 45 — Piedade
-                </div>
-                <a href="https://wa.me/5581999664340?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20atendimento%20para%20a%20loja%20de%20Piedade." 
-                   target="_blank" 
-                   class="btn-whatsapp">
-                    <i class="fa-brands fa-whatsapp"></i>
-                    WhatsApp Unidade Piedade
-                </a>
-            </div>
+    </div>
 
-            <!-- Botão 2: Mercado da Madalena -->
-            <div class="store-card">
-                <div class="store-title">
-                    <i class="fa-solid fa-store" style="color: var(--primary-color);"></i>
-                    Unidade Mercado da Madalena
-                </div>
-                <div class="store-address">
-                    <i class="fa-solid fa-location-dot"></i>
-                    Rua Real da Torre, 67 (Boxes 92 a 99)
-                </div>
-                <a href="https://wa.me/5581999664340?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20atendimento%20para%20a%20loja%20da%20Madalena." 
-                   target="_blank" 
-                   class="btn-whatsapp">
-                    <i class="fa-brands fa-whatsapp"></i>
-                    WhatsApp Mercado da Madalena
-                </a>
-            </div>
+    <!-- Destaques -->
+    <div class="features">
+      <div class="features-title">O que você encontra na Vida Aquática</div>
+      <div class="features-grid">
+        <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Peixes Ornamentais & Raros</div>
+        <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Aquários sob medida</div>
+        <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Rações & Equipamentos</div>
+        <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Répteis e Pequenos Pets</div>
+      </div>
+    </div>
 
-        </div>
+    <!-- Links Secundários -->
+    <div class="info-links">
+      <a href="https://instagram.com/vida_aquatica" target="_blank" class="info-btn">
+        <i class="fa-brands fa-instagram" style="color: #E1306C;"></i> @vida_aquatica
+      </a>
+      <a href="https://www.facebook.com/vida.aquatica.pe" target="_blank" class="info-btn">
+        <i class="fa-brands fa-facebook" style="color: var(--primary-color);"></i>facebook
+      </a>
+    </div>
 
-        <!-- Destaques -->
-        <div class="features">
-            <div class="features-title">O que você encontra na Vida Aquática</div>
-            <div class="features-grid">
-                <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Peixes Ornamentais & Raros</div>
-                <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Aquários sob medida</div>
-                <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Rações & Equipamentos</div>
-                <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Répteis e Pequenos Pets</div>
-            </div>
-        </div>
+  </main>
 
-        <!-- Links Secundários -->
-        <div class="info-links">
-            <a href="https://instagram.com/vida_aquatica" target="_blank" class="info-btn">
-                <i class="fa-brands fa-instagram" style="color: #E1306C;"></i> @vida_aquatica
-            </a>
-            <a href="https://www.vidaaquatica.com.br" target="_blank" class="info-btn">
-                <i class="fa-solid fa-globe" style="color: var(--primary-color);"></i> Nosso Site
-            </a>
-        </div>
+  <footer>
+    <p>© Vida Aquática Aquarismo e Pet Shop — Todos os direitos reservados.</p>
+  </footer>
 
-    </main>
 
-    <footer>
-        <p>© Vida Aquática Aquarismo e Pet Shop — Todos os direitos reservados.</p>
-    </footer>
+  <!-- Script para gerar bolhas com tamanhos e tempos variados -->
+  <script>
+    const bubblesContainer = document.getElementById('bubbles');
+    const numberOfBubbles = 30; // Quantidade de bolhas na tela
 
+    for (let i = 0; i < numberOfBubbles; i++) {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+
+      // Tamanho aleatório entre 5px e 20px
+      const size = Math.random() * 12 + 5;
+      bubble.style.width = `${size}px`;
+      bubble.style.height = `${size}px`;
+
+      // Posição horizontal aleatória (0% a 100%)
+      bubble.style.left = `${Math.random() * 100}%`;
+
+      // Duração da animação aleatória (entre 5s e 15s)
+      const duration = Math.random() * 10 + 5;
+      bubble.style.animationDuration = `${duration}s`;
+
+      // Atraso de início aleatório para não subirem todas juntas
+      const delay = Math.random() * 10;
+      bubble.style.animationDelay = `${delay}s`;
+
+      // 80% das bolhas ficam 50% transparentes na metade do percurso
+      if (Math.random() < 0.8) {
+        bubble.style.animationName = 'riseFade';
+      }
+
+      bubblesContainer.appendChild(bubble);
+    }
+  </script>
 </body>
+
 </html>
